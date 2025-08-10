@@ -1,7 +1,7 @@
-FIRST_NAME = "Anastasia"
+FIRST_NAME = "Евгений"
 
 EXISTING_USER = {
     "name": FIRST_NAME,
-    "email": "anastasya0rlova@yandex.ru",
-    "password": "qwerty123"
+    "email": "evgsmoloviy22007@yandex.ru",
+    "password": "123456"
 }
