@@ -15,7 +15,7 @@ class TestNavigation:
             main_page.click_constructor()
 
         with allure.step("Проверяем, что отображается текст 'Соберите бургер'"):
-            assert main_page.is_displayed(MainPageLocators.CREATE_BURGER_TEXT), "Страница конструктора не открылась"
+            assert main_page.is_create_burger_text_displayed(), "Страница конструктора не открылась"
 
     @allure.story("Переход по кнопке Лента заказов")
     @allure.title("Проверяем, что при клике на 'Лента заказов' открывается страница с лентой заказов")
@@ -30,5 +30,5 @@ class TestNavigation:
             assert "/feed" in feed_page.get_current_url(), "URL не содержит /feed"
 
         with allure.step("Проверяем, что отображается счётчик заказов"):
-            assert feed_page.is_displayed(OrderPageLocators.ALL_ORDERS_COUNTER), \
+            assert feed_page.is_orders_counter_displayed(), \
                 "Счётчик заказов не отображается — страница ленты заказов не загрузилась"

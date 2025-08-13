@@ -63,10 +63,14 @@ class MainPage(BasePage):
         source = self.find(MainPageLocators.BUN_INGREDIENT)
         target = self.find(MainPageLocators.CONSTRUCTOR_FIELD)
         drag_and_drop(self.driver, source, target)
-        # Если после dnd появляется модалка с деталями, закрываем её
+        # Если после dnd появляется модальное окно с деталями, закрываем её
         if self.is_displayed(MainPageLocators.INGREDIENT_DETAILS, timeout=2):
             self.close_ingredient_details()
 
     @allure.step("Получаем номер созданного заказа")
     def get_order_id(self):
         return self.find(MainPageLocators.ORDER_ID).text.strip()
+
+    @allure.step("Проверяем, отображается ли текст 'Соберите бургер'")
+    def is_create_burger_text_displayed(self):
+        return self.is_displayed(MainPageLocators.CREATE_BURGER_TEXT)
