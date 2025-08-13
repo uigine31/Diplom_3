@@ -97,3 +97,8 @@ class BasePage:
             except Exception:
                 return False
         WebDriverWait(self.driver, timeout).until(text_changed)
+    
+    @allure.step("Ожидаем выполнения условия")
+    def wait_for_condition(self, condition_func, timeout=10):
+        """Ожидаем выполнения условия, переданного в функции"""
+        return WebDriverWait(self.driver, timeout).until(condition_func)

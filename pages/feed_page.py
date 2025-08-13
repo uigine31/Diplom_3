@@ -1,7 +1,6 @@
 import allure
 from pages.base_page import BasePage
 from locators import OrderPageLocators
-from selenium.webdriver.support.ui import WebDriverWait
 
 class FeedPage(BasePage):
 
@@ -31,10 +30,13 @@ class FeedPage(BasePage):
     @allure.step("Ожидаем появления заказа с номером {order_id} в разделе 'В работе'")
     def wait_for_order_in_progress(self, order_id, timeout=10):
         order_id = str(order_id).strip()
+        
         def order_appeared(driver):
             try:
                 orders = self.find_all(OrderPageLocators.ORDER_LIST)
                 return any(order_id in order.text.strip() for order in orders if order.text.strip())
             except Exception:
                 return False
-        WebDriverWait(self.driver, timeout).until(order_appeared)
+        
+        # Используем метод из базового класса вместо прямого WebDriverWait
+        self.wait_for_condition(order_appeared, timeout)
