@@ -41,7 +41,7 @@ class TestOrderFlow:
         feed_page = FeedPage(authorized_browser)
 
         # 1. Дождаться загрузки конструктора
-        main_page.wait_for_visibility(MainPageLocators.CREATE_BURGER_TEXT)
+        main_page.wait_for_constructor_loaded()  # Используем метод страницы вместо прямого локатора
 
         # 2. Перейти в ленту заказов и запомнить счётчики
         feed_page.open_feed_page()
@@ -51,7 +51,7 @@ class TestOrderFlow:
 
         # 3. Вернуться в конструктор
         main_page.open_main_page()
-        main_page.wait_for_visibility(MainPageLocators.CONSTRUCTOR_FIELD)
+        main_page.wait_for_constructor_loaded()  # Используем метод страницы вместо прямого локатора
 
         with allure.step("Добавляем булку в заказ и оформляем заказ"):
             main_page.add_bun_ingredient_to_order()

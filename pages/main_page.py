@@ -33,16 +33,12 @@ class MainPage(BasePage):
         # 1. Ждём исчезновения оверлея (если он есть)
         overlay_locator = (By.CSS_SELECTOR, "div[class*='modal_overlay']")
         try:
-            WebDriverWait(self.driver, 10).until(
-                EC.invisibility_of_element_located(overlay_locator)
-            )
+            self.wait_for_invisibility(overlay_locator)
         except Exception:
             pass  # Если оверлея нет — продолжаем
         # 2. Ждём кликабельности кнопки
         close_btn_locator = MainPageLocators.CLOSE_POP_UP_INGREDIENT_DETAILS_BUTTON
-        WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable(close_btn_locator)
-        )
+        self.wait_for_clickable(close_btn_locator)
         # 3. Обычный клик
         self.click(close_btn_locator)
         assert self.is_ingredient_details_closed(), "Модальное окно не закрылось после клика по крестику"
@@ -74,3 +70,8 @@ class MainPage(BasePage):
     @allure.step("Проверяем, отображается ли текст 'Соберите бургер'")
     def is_create_burger_text_displayed(self):
         return self.is_displayed(MainPageLocators.CREATE_BURGER_TEXT)
+    
+    @allure.step("Дожидаемся загрузки конструктора")
+    def wait_for_constructor_loaded(self):
+        """Дожидаемся загрузки главной страницы конструктора"""
+        self.wait_for_visibility(MainPageLocators.CREATE_BURGER_TEXT)
