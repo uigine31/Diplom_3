@@ -9,7 +9,7 @@ class MainPageLocators:
     CREATE_BURGER_TEXT = (By.XPATH, "//h1[text()='Соберите бургер']")  # Текст "Собери бургер"
     READY_TEXT = (By.XPATH, "//p[text()='Готовы:']")  # Текст "Готовы"
     BUN_INGREDIENT = (By.XPATH, "//img[@alt='Флюоресцентная булка R2-D3']")  # Кнопка "Флюоресцентная булка"
-    INGREDIENT_DETAILS = (By.XPATH, "//h2[text()='Детали ингредиента']")  # Поп-ап "Детали ингредиента")
+    INGREDIENT_DETAILS = (By.XPATH, "//h2[text()='Детали ингредиента']")  # Поп-ап "Детали ингредиента"
     CLOSE_POP_UP_INGREDIENT_DETAILS_BUTTON = (By.CSS_SELECTOR, "button[class*='modal__close']")  # Кнопка "Закрыть" на поп-апе Детали ингредиента
     SAUCES_BUTTON = (By.XPATH, "//h2[text()='Соусы']")  # Кнопка "Соусы"
     SPICY_SAUCE = (By.XPATH, "//img[@alt='Соус Spicy-X']")  # Соус Spicy-X
@@ -17,7 +17,7 @@ class MainPageLocators:
     COUNTER = (By.XPATH, "//a[.//img[@alt='Флюоресцентная булка R2-D3']]//div[contains(@class, 'counter_counter')]//p[contains(@class, 'counter_counter__num')]")  # Счетчик в правом верхнем углу над булкой
     ORDER_ID = (By.XPATH, "//p[contains(@class, 'text_type_digits')]")  # Номер заказа (цифры)
     ORDER_POP_UP = (By.XPATH, "//div[contains(@class, 'Modal_modal__contentBox')]")  # Поп-ап заказа
-    CLOSE_POP_UP_ORDER = (By.XPATH, "//button[contains(@class, 'Modal_modal__close_modified__3V5XS')]") # Кнопка "Закрыть" поп-ап
+    CLOSE_POP_UP_ORDER = (By.CSS_SELECTOR, "button[class*='modal__close']")  # Кнопка "Закрыть" поп-ап
 
 class OrderPageLocators:
     ORDER_LIST = (By.XPATH, "//div[contains(@class, 'OrderHistory_dataBox__1mkxK')]")  # Список заказов (устойчивый локатор)

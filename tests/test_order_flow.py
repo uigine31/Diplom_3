@@ -41,7 +41,7 @@ class TestOrderFlow:
         feed_page = FeedPage(authorized_browser)
 
         # 1. Дождаться загрузки конструктора
-        main_page.wait_for_constructor_loaded()  # Используем метод страницы вместо прямого локатора
+        main_page.wait_for_constructor_loaded()
 
         # 2. Перейти в ленту заказов и запомнить счётчики
         feed_page.open_feed_page()
@@ -51,7 +51,7 @@ class TestOrderFlow:
 
         # 3. Вернуться в конструктор
         main_page.open_main_page()
-        main_page.wait_for_constructor_loaded()  # Используем метод страницы вместо прямого локатора
+        main_page.wait_for_constructor_loaded()
 
         with allure.step("Добавляем булку в заказ и оформляем заказ"):
             main_page.add_bun_ingredient_to_order()
@@ -59,21 +59,19 @@ class TestOrderFlow:
             main_page.click(MainPageLocators.ORDER_BUTTON)
 
         with allure.step("Получаем номер созданного заказа"):
-            main_page.wait_for_visibility(MainPageLocators.ORDER_ID)
+            main_page.wait_for_visibility(MainPageLocators.ORDER_POP_UP)
             order_id = main_page.get_order_id()
             assert order_id, "Не удалось получить номер заказа — он пустой или None"
 
             main_page.wait_for_visibility(MainPageLocators.ORDER_POP_UP)
-            # Закрыть окно заказа через универсальный селектор
-            close_button = (By.CSS_SELECTOR, "button[class*='modal__close']")
-            main_page.js_click(close_button)
+            main_page.js_click(MainPageLocators.CLOSE_POP_UP_ORDER)
             main_page.wait_for_invisibility(MainPageLocators.ORDER_POP_UP)
 
         # 4. Перейти в ленту заказов
         feed_page.open_feed_page()
         feed_page.wait_for_visibility(OrderPageLocators.ALL_ORDERS_COUNTER)
 
-        #  Ждём, пока значения счётчиков увеличатся
+        # Ждём, пока значения счётчиков увеличатся
         feed_page.wait_for_text_change(OrderPageLocators.ALL_ORDERS_COUNTER, total_before)
         feed_page.wait_for_text_change(OrderPageLocators.TODAY_ORDERS_COUNTER, today_before)
 
