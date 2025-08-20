@@ -18,6 +18,7 @@ class MainPageLocators:
     ORDER_ID = (By.XPATH, "//p[contains(@class, 'text_type_digits')]")  # Номер заказа (цифры)
     ORDER_POP_UP = (By.XPATH, "//div[contains(@class, 'Modal_modal__contentBox')]")  # Поп-ап заказа
     CLOSE_POP_UP_ORDER = (By.CSS_SELECTOR, "button[class*='modal__close']")  # Кнопка "Закрыть" поп-ап
+    MODAL_OVERLAY = (By.CSS_SELECTOR, "div[class*='modal_overlay']")  # Оверлей модального окна
 
 class OrderPageLocators:
     ORDER_LIST = (By.XPATH, "//div[contains(@class, 'OrderHistory_dataBox__1mkxK')]")  # Список заказов (устойчивый локатор)

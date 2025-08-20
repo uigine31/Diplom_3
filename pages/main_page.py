@@ -31,9 +31,8 @@ class MainPage(BasePage):
     @allure.step("Закрываем окно деталей ингредиента")
     def close_ingredient_details(self):
         # 1. Ждём исчезновения оверлея (если он есть)
-        overlay_locator = (By.CSS_SELECTOR, "div[class*='modal_overlay']")
         try:
-            self.wait_for_invisibility(overlay_locator)
+            self.wait_for_invisibility(MainPageLocators.MODAL_OVERLAY)
         except Exception:
             pass  # Если оверлея нет — продолжаем
         # 2. Ждём кликабельности кнопки
