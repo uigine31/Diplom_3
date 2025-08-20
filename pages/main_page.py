@@ -74,3 +74,15 @@ class MainPage(BasePage):
     def wait_for_constructor_loaded(self):
         """Дожидаемся загрузки главной страницы конструктора"""
         self.wait_for_visibility(MainPageLocators.CREATE_BURGER_TEXT)
+
+    @allure.step("Ожидаем, что кнопка 'Оформить заказ' станет кликабельной")
+    def wait_for_order_button_clickable(self, timeout=10):
+        self.wait_for_clickable(MainPageLocators.ORDER_BUTTON, timeout)
+
+    @allure.step("Ожидаем видимость поп-апа заказа")
+    def wait_for_order_popup_visible(self, timeout=10):
+        self.wait_for_visibility(MainPageLocators.ORDER_POP_UP, timeout)
+
+    @allure.step("Ожидаем, что поп-ап заказа станет невидимым")
+    def wait_for_order_popup_invisible(self, timeout=10):
+        self.wait_for_invisibility(MainPageLocators.ORDER_POP_UP, timeout)

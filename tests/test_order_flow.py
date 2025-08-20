@@ -1,9 +1,7 @@
 import allure
-from locators import MainPageLocators, OrderPageLocators
+from locators import MainPageLocators
 from pages.main_page import MainPage
 from pages.feed_page import FeedPage
-import time
-from selenium.webdriver.common.by import By
 
 @allure.feature("Проверка функционала заказа в Stellar Burgers")
 class TestOrderFlow:
@@ -45,7 +43,7 @@ class TestOrderFlow:
 
         # 2. Перейти в ленту заказов и запомнить счётчики
         feed_page.open_feed_page()
-        feed_page.wait_for_visibility(OrderPageLocators.ALL_ORDERS_COUNTER)
+        feed_page.wait_for_all_orders_counter_visible()
         total_before = feed_page.get_total_orders_count()
         today_before = feed_page.get_today_orders_count()
 
@@ -55,25 +53,25 @@ class TestOrderFlow:
 
         with allure.step("Добавляем булку в заказ и оформляем заказ"):
             main_page.add_bun_ingredient_to_order()
-            main_page.wait_for_clickable(MainPageLocators.ORDER_BUTTON)
+            main_page.wait_for_order_button_clickable()
             main_page.click(MainPageLocators.ORDER_BUTTON)
 
         with allure.step("Получаем номер созданного заказа"):
-            main_page.wait_for_visibility(MainPageLocators.ORDER_POP_UP)
+            main_page.wait_for_order_popup_visible()
             order_id = main_page.get_order_id()
             assert order_id, "Не удалось получить номер заказа — он пустой или None"
 
-            main_page.wait_for_visibility(MainPageLocators.ORDER_POP_UP)
+            main_page.wait_for_order_popup_visible()
             main_page.js_click(MainPageLocators.CLOSE_POP_UP_ORDER)
-            main_page.wait_for_invisibility(MainPageLocators.ORDER_POP_UP)
+            main_page.wait_for_order_popup_invisible()
 
         # 4. Перейти в ленту заказов
         feed_page.open_feed_page()
-        feed_page.wait_for_visibility(OrderPageLocators.ALL_ORDERS_COUNTER)
+        feed_page.wait_for_all_orders_counter_visible()
 
         # Ждём, пока значения счётчиков увеличатся
-        feed_page.wait_for_text_change(OrderPageLocators.ALL_ORDERS_COUNTER, total_before)
-        feed_page.wait_for_text_change(OrderPageLocators.TODAY_ORDERS_COUNTER, today_before)
+        feed_page.wait_for_all_orders_counter_change(total_before)
+        feed_page.wait_for_today_orders_counter_change(today_before)
 
         total_after = feed_page.get_total_orders_count()
         today_after = feed_page.get_today_orders_count()

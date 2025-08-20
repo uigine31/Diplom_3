@@ -41,3 +41,15 @@ class FeedPage(BasePage):
     @allure.step("Проверяем, отображается ли счётчик заказов")
     def is_orders_counter_displayed(self):
         return self.is_displayed(OrderPageLocators.ALL_ORDERS_COUNTER)
+
+    @allure.step("Ожидаем видимость счётчика всех заказов")
+    def wait_for_all_orders_counter_visible(self, timeout=10):
+        self.wait_for_visibility(OrderPageLocators.ALL_ORDERS_COUNTER, timeout)
+
+    @allure.step("Ожидаем, что текст счётчика всех заказов изменится с {old_value}")
+    def wait_for_all_orders_counter_change(self, old_value, timeout=10):
+        self.wait_for_text_change(OrderPageLocators.ALL_ORDERS_COUNTER, old_value, timeout)
+
+    @allure.step("Ожидаем, что текст счётчика заказов за сегодня изменится с {old_value}")
+    def wait_for_today_orders_counter_change(self, old_value, timeout=10):
+        self.wait_for_text_change(OrderPageLocators.TODAY_ORDERS_COUNTER, old_value, timeout)
