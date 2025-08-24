@@ -86,3 +86,11 @@ class MainPage(BasePage):
     @allure.step("Ожидаем, что поп-ап заказа станет невидимым")
     def wait_for_order_popup_invisible(self, timeout=10):
         self.wait_for_invisibility(MainPageLocators.ORDER_POP_UP, timeout)
+
+    @allure.step("Кликаем по кнопке 'Оформить заказ'")
+    def click_order_button(self):
+        self.click(MainPageLocators.ORDER_BUTTON)
+
+    @allure.step("Закрываем поп-ап заказа")
+    def close_order_popup(self):
+        self.js_click(MainPageLocators.CLOSE_POP_UP_ORDER)

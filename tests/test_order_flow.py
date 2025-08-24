@@ -1,5 +1,4 @@
 import allure
-from locators import MainPageLocators
 from pages.main_page import MainPage
 from pages.feed_page import FeedPage
 
@@ -54,7 +53,7 @@ class TestOrderFlow:
         with allure.step("Добавляем булку в заказ и оформляем заказ"):
             main_page.add_bun_ingredient_to_order()
             main_page.wait_for_order_button_clickable()
-            main_page.click(MainPageLocators.ORDER_BUTTON)
+            main_page.click_order_button()
 
         with allure.step("Получаем номер созданного заказа"):
             main_page.wait_for_order_popup_visible()
@@ -62,7 +61,7 @@ class TestOrderFlow:
             assert order_id, "Не удалось получить номер заказа — он пустой или None"
 
             main_page.wait_for_order_popup_visible()
-            main_page.js_click(MainPageLocators.CLOSE_POP_UP_ORDER)
+            main_page.close_order_popup()
             main_page.wait_for_order_popup_invisible()
 
         # 4. Перейти в ленту заказов
